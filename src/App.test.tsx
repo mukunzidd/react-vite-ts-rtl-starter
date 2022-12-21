@@ -1,12 +1,13 @@
 import { describe, it } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import { screen, render } from './test/utils';
 
-import App from './App';
+import { WrappedApp, App } from './App';
 
 describe('App Render', () => {
-  it('prints Hola Mundo', () => {
+  it('prints Hola Mundo', async () => {
     // ARRANGE
-    render(<App />);
+    render(<WrappedApp />);
     // ACT - events
     // EXPECT
     expect(
@@ -14,5 +15,16 @@ describe('App Render', () => {
         level: 1,
       })
     ).toHaveTextContent('Hola Mundo!');
+  });
+  it('renders NotFound Path if invalid path', async () => {
+    // ARRANGE&ACT: go to a specific path /w memory router
+    render(
+      <MemoryRouter initialEntries={['/purplehippo']}>
+        <App />
+      </MemoryRouter>
+    );
+    // EXPECT
+    expect(screen.getByRole('link'));
+    expect(screen.getAllByText('Go Home'));
   });
 });

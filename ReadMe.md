@@ -30,6 +30,10 @@ setupFiles: './src/setupTests.ts',
 "test:ui": "vitest --ui",
 "coverage": "vitest run --coverage"
 ```
-
 [ ] Setup react-router
+- install `react-router`
+- wrapp the App with a HashRouter
+- Browser router is an option but uses the history API which causes trouble deploying to different CDNs. Basically needs 404 redirects hence needing special configuration
+- 
+
 [ ] Build a simple app from the setup
